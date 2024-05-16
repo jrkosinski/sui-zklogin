@@ -1,5 +1,5 @@
 {
-    "name": "dacade_sui_zklogin",
+    "name": "sui ZKLogin",
     "version": "0.1.0",
     "description": "SUI zkLogin app",
     "scripts": {
