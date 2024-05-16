@@ -1,5 +1,5 @@
 {
-    "name": "sui ZKLogin",
+    "name": "sui-zklogin",
     "version": "0.1.0",
     "description": "SUI zkLogin app",
     "scripts": {
