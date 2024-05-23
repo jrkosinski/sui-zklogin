@@ -1,16 +1,24 @@
 import React, { useEffect } from 'react';
+import axios from 'axios';
 
 const Callback = () => {
     useEffect(() => {
         const handleCallback = async () => {
             try {
                 const params = new URLSearchParams(
-                    window.location.hash.substr(1)
+                    window.location.hash.substring(1)
                 );
                 const jwtToken = params.get('id_token');
-                console.log(jwtToken);
 
                 sessionStorage.setItem('sui_jwt_token', jwtToken);
+
+                const urlParams = new URLSearchParams(window.location.search);
+                const nonceToken = urlParams.get('nonce_token');
+
+                console.log('nonce from querystring:', nonceToken);
+                if (nonceToken && nonceToken.length)
+                    sessionStorage.setItem('nonce_token', nonceToken);
+
                 window.location.href = '/auth';
             } catch (error) {
                 console.error('Error handling callback:', error);

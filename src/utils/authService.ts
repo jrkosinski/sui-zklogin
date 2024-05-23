@@ -15,7 +15,6 @@ const PROVER_URL = 'https://prover-dev.mystenlabs.com/v1';
 const REDIRECT_URL = 'http://localhost:8080';
 const OPENID_PROVIDER_URL =
     'https://accounts.google.com/.well-known/openid-configuration';
-const CLIENT_ID = process.env.GOOGLE_APP_KEY;
 
 const SUI_CLIENT = new SuiClient({ url: getFullnodeUrl('testnet') });
 
@@ -105,6 +104,14 @@ export class AuthService {
         return AuthService.getJwtData().randomness;
     }
 
+    static email() {
+        return AuthService.claims()['email'];
+    }
+
+    static nonceToken(): string {
+        return sessionStorage.getItem('nonce_token');
+    }
+
     private static getJwtData() {
         return JSON.parse(sessionStorage.getItem('jwt_data'));
     }
@@ -169,7 +176,7 @@ export class AuthService {
         sessionStorage.setItem('jwt_data', JSON.stringify(jwtData));
 
         const params = new URLSearchParams({
-            client_id: CLIENT_ID,
+            client_id: proccess.env.CLIENT_ID,
             redirect_uri: REDIRECT_URL,
             response_type: 'id_token',
             scope: 'openid email',
