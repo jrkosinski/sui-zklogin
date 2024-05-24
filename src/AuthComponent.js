@@ -1,10 +1,11 @@
 import React from 'react';
-import { AuthService } from './utils/authService';
-
+import { AuthService } from './authService';
 
 const AuthButton = () => {
-	const authService = new AuthService();
-  return <button onClick={() => authService.login()}>Login with Google</button>;
+    const authService = new AuthService();
+    return (
+        <button onClick={() => authService.login()}>Login with Google</button>
+    );
 };
 
 export default AuthButton;

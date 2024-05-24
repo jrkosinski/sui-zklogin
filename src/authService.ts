@@ -1,6 +1,7 @@
 import { SuiClient, getFullnodeUrl } from '@mysten/sui.js/client';
 import axios from 'axios';
 import { Ed25519Keypair } from '@mysten/sui.js/keypairs/ed25519';
+import { config } from './config';
 import {
     generateNonce,
     generateRandomness,
@@ -176,7 +177,7 @@ export class AuthService {
         sessionStorage.setItem('jwt_data', JSON.stringify(jwtData));
 
         const params = new URLSearchParams({
-            client_id: proccess.env.CLIENT_ID,
+            client_id: config.GOOGLE_API_KEY,
             redirect_uri: REDIRECT_URL,
             response_type: 'id_token',
             scope: 'openid email',

@@ -12,14 +12,10 @@ const Callback = () => {
 
                 sessionStorage.setItem('sui_jwt_token', jwtToken);
 
-                const urlParams = new URLSearchParams(window.location.search);
-                const nonceToken = urlParams.get('nonce_token');
-
-                console.log('nonce from querystring:', nonceToken);
-                if (nonceToken && nonceToken.length)
-                    sessionStorage.setItem('nonce_token', nonceToken);
-
-                window.location.href = '/auth';
+                (window.location.href =
+                    '/auth?nonce_token=' +
+                        sessionStorage.getItem('nonce_token') ?? ''),
+                    nonceToken;
             } catch (error) {
                 console.error('Error handling callback:', error);
             }

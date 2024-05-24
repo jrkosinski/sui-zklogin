@@ -1,18 +1,23 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import AuthButton from './AuthComponent';
-import { AuthService } from './utils/authService';
+import { AuthService } from './authService';
 import axios from 'axios';
 import './App.css';
 
 const App = () => {
-    const [balance, setBalance] = useState('0');
     const [walletAddress, setWalletAddress] = useState('0x0');
 
-    const getBalance = useCallback(async () => {
+    const getData = useCallback(async () => {
         try {
             if (AuthService.isAuthenticated()) {
-                setBalance(1);
                 setWalletAddress(AuthService.walletAddress());
+
+                const urlParams = new URLSearchParams(window.location.search);
+                const nonceToken = urlParams.get('nonce_token');
+
+                console.log('nonce from querystring:', nonceToken);
+                if (nonceToken && nonceToken.length)
+                    sessionStorage.setItem('nonce_token', nonceToken);
 
                 console.log('email:', AuthService.email());
                 console.log('jwt:', AuthService.jwt());
@@ -21,7 +26,7 @@ const App = () => {
 
                 axios
                     .post(
-                        'http://54.95.68.79:3000/api/v1/oauth',
+                        'http://localhost:3000/api/v1/oauth',
                         {
                             username: AuthService.email(),
                             suiAddress: AuthService.walletAddress(),
@@ -45,8 +50,8 @@ const App = () => {
     });
 
     useEffect(() => {
-        getBalance();
-    }, [getBalance]);
+        getData();
+    }, [getData]);
 
     const logout = async () => {
         // logout
