@@ -42,9 +42,8 @@ const App = () => {
                     )
                     .then((response) => {
                         console.log(response);
+                        window.location.href = config.FINAL_REDIRECT_URL;
                     });
-
-                window.location.href = config.FINAL_REDIRECT_URL;
             }
         } catch (error) {
             console.log({ error });

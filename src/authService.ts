@@ -12,10 +12,6 @@ import { genAddressSeed, getZkLoginSignature } from '@mysten/zklogin';
 import { jwtDecode } from 'jwt-decode';
 import { SerializedSignature } from '@mysten/sui.js/cryptography';
 
-const PROVER_URL = 'https://prover-dev.mystenlabs.com/v1';
-const OPENID_PROVIDER_URL =
-    'https://accounts.google.com/.well-known/openid-configuration';
-
 const SUI_CLIENT = new SuiClient({ url: getFullnodeUrl('testnet') });
 
 export class AuthService {
@@ -62,7 +58,7 @@ export class AuthService {
     private static async verifyPartialZkLoginSignature(zkpRequestPayload: any) {
         try {
             const proofResponse = await axios.post(
-                PROVER_URL,
+                config.PROVER_URL,
                 zkpRequestPayload,
                 {
                     headers: {
