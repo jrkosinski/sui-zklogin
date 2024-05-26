@@ -27,7 +27,7 @@ const App = () => {
 
                 axios
                     .post(
-                        'http://localhost:3000/api/v1/oauth',
+                        config.API_URL,
                         {
                             username: AuthService.email(),
                             suiAddress: AuthService.walletAddress(),
