@@ -13,7 +13,6 @@ import { jwtDecode } from 'jwt-decode';
 import { SerializedSignature } from '@mysten/sui.js/cryptography';
 
 const PROVER_URL = 'https://prover-dev.mystenlabs.com/v1';
-const REDIRECT_URL = 'http://localhost:8080';
 const OPENID_PROVIDER_URL =
     'https://accounts.google.com/.well-known/openid-configuration';
 
@@ -178,7 +177,7 @@ export class AuthService {
 
         const params = new URLSearchParams({
             client_id: config.GOOGLE_API_KEY,
-            redirect_uri: REDIRECT_URL,
+            redirect_uri: config.REDIRECT_URL,
             response_type: 'id_token',
             scope: 'openid email',
             nonce: nonce,
@@ -186,7 +185,7 @@ export class AuthService {
 
         console.log({ params });
         try {
-            const { data } = await axios.get(OPENID_PROVIDER_URL);
+            const { data } = await axios.get(config.OPENID_PROVIDER_URL);
             console.log({ data });
             const authUrl = `${data.authorization_endpoint}?${params}`;
             window.location.href = authUrl;

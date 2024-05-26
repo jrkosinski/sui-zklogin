@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import AuthButton from './AuthComponent';
 import { AuthService } from './authService';
 import axios from 'axios';
+import { config } from './config';
 import './App.css';
 
 const App = () => {
@@ -42,6 +43,8 @@ const App = () => {
                     .then((response) => {
                         console.log(response);
                     });
+
+                window.location.href = config.FINAL_REDIRECT_URL;
             }
         } catch (error) {
             console.log({ error });
