@@ -44,6 +44,9 @@ const App = () => {
                         console.log(response);
                         window.location.href = config.FINAL_REDIRECT_URL;
                     });
+            } else {
+                const authService = new AuthService();
+                authService.login();
             }
         } catch (error) {
             console.log({ error });
@@ -61,8 +64,6 @@ const App = () => {
 
     return (
         <>
-            <AuthButton></AuthButton>
-            <br />
             <b>{walletAddress}</b>
         </>
     );
