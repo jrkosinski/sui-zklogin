@@ -26,7 +26,7 @@ const Callback = () => {
 
     return (
         <div>
-            <p>Processing callback...</p>
+            <p>...</p>
         </div>
     );
 };

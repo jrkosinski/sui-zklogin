@@ -25,9 +25,9 @@ const App = () => {
                 console.log('wallet:', AuthService.walletAddress());
                 console.log('nonce_token:', AuthService.nonceToken());
 
-                axios
+                /*axios
                     .post(
-                        config.API_URL,
+                        `${config.API_URL}?nonceToken=${AuthService.nonceToken()}`,
                         {
                             username: AuthService.email(),
                             suiAddress: AuthService.walletAddress(),
@@ -42,8 +42,10 @@ const App = () => {
                     )
                     .then((response) => {
                         console.log(response);
-                        window.location.href = config.FINAL_REDIRECT_URL;
-                    });
+                        window.location.href = `/${AuthService.walletAddress()}/${AuthService.email()}`;
+                    });*/
+
+                window.location.href = `/${AuthService.walletAddress()}/${AuthService.email()}`;
             } else {
                 const authService = new AuthService();
                 authService.login();
@@ -62,11 +64,7 @@ const App = () => {
         // logout
     };
 
-    return (
-        <>
-            <b>{walletAddress}</b>
-        </>
-    );
+    return <></>;
 };
 
 export default App;
